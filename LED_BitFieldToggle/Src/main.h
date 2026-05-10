@@ -36,13 +36,29 @@ typedef struct
 	uint32_t otghsulpi_en:	1;
 	uint32_t resereved5:	1;
 
-}RCC_AHB1ENR;
+}RCC_AHB1ENR_t;
 
 
 typedef struct
 {
+	uint32_t pinmode_0:		2;
+	uint32_t pinmode_1:		2;
+	uint32_t pinmode_2:		2;
+	uint32_t pinmode_3:		2;
+	uint32_t pinmode_4:		2;
+	uint32_t pinmode_5:		2;
+	uint32_t pinmode_6:		2;
+	uint32_t pinmode_7:		2;
+	uint32_t pinmode_8:		2;
+	uint32_t pinmode_9:		2;
+	uint32_t pinmode_10:	2;
+	uint32_t pinmode_11:	2;
+	uint32_t pinmode_12:	2;
+	uint32_t pinmode_13:	2;
+	uint32_t pinmode_14:	2;
+	uint32_t pinmode_15:	2;
 
-};
+}GPIOx_MODER_t;
 
 
 #endif /* MAIN_H_ */
