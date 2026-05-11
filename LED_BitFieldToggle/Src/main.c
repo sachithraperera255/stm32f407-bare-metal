@@ -17,13 +17,33 @@
  */
 
 #include <stdint.h>
-
-#if !defined(__SOFT_FP__) && defined(__ARM_FP)
-  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
-#endif
+#include "main.h"
 
 int main(void)
 {
+
+	RCC_AHB1ENR_t volatile *const pClkCtrlReg = (RCC_AHB1ENR_t*)0x40023830;
+	GPIOx_MODER_t volatile *const pPortDModeReg = (GPIOx_MODER_t*)0x40020c00;
+	GPIOx_ODR_t volatile *const pPortRegOutReg = (GPIOx_ODR_t*)0x40020c14;
+
+	// Enable the clock for GPIOD port
+	pClkCtrlReg -> gpiod_en = 1;
+
+	// Set bits 24th & 25th to 1 (high), which enable the general purpose output mode
+	pPortDModeReg ->pinmode_12 = 1;
+
+	while(1)
+	{
+		pPortRegOutReg->pin_12 = 1;
+
+		for(uint32_t i = 0; i < 300000; i++);
+
+		pPortRegOutReg->pin_12 = 0;
+
+		for(uint32_t i = 0; i < 300000; i++);
+	}
+
+
     /* Loop forever */
-	for(;;);
+	//for(;;);
 }
